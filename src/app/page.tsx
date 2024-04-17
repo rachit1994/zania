@@ -19,11 +19,12 @@ const Home = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex h-screen items-center justify-center w-full">
-        <div className="grid grid-cols-3 gap-4 w-full">
+      <div className="flex h-full items-center justify-center w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           {data?.map((item: any) => {
             return (
               <div key={item.position} className="col-span-1 rounded-lg h-64">
+                <h3>{item.title}</h3>
                 <Image
                   src={`/images/${item.position}.webp`}
                   alt={item.title}
