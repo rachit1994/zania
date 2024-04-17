@@ -1,6 +1,6 @@
 "use client";
-import { base64Str } from "@/components/Loaders/imageFallbackLoader";
-import Image from "next/image";
+import { MyData } from "@/components/Body/fetcher";
+import Card from "@/components/Card";
 import useSWR from "swr";
 import Loading from "./loading";
 
@@ -21,19 +21,9 @@ const Home = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex h-full items-center justify-center w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-          {data?.map((item: any) => {
+          {data?.map((item: MyData) => {
             return (
-              <div key={item.position} className="col-span-1 rounded-lg h-64">
-                <h3>{item.title}</h3>
-                <Image
-                  src={`/images/${item.position}.webp`}
-                  alt={item.title}
-                  width={100}
-                  height={100}
-                  className="w-full h-full rounded-lg"
-                  placeholder={base64Str}
-                />
-              </div>
+              <Card key={item.position} item={item} />
             );
           })}
         </div>
