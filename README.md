@@ -14,6 +14,8 @@ v21.1.0
 
 ### Explainations
 
+```
+
 /my-nextjs-project
 │
 ├── .github
@@ -47,3 +49,5 @@ v21.1.0
 ├── package.json                # Project metadata and dependencies
 ├── README.md                   # Project overview and documentation
 └── yarn.lock or package-lock.json # Dependency lock file
+
+```
