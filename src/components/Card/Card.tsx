@@ -1,8 +1,8 @@
 import { base64Str } from "@/components/Loaders/imageFallbackLoader";
 import Overlay from "@/components/Overlay";
+import { MyData } from "@/lib/features/home/fallbackJson";
 import Image from "next/image";
 import { memo } from "react";
-import { MyData } from "../Body/fetcher";
 
 const Card = ({ item }: { item: MyData }) => {
   return (

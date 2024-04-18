@@ -12,7 +12,7 @@ export enum Status {
 export interface CounterSliceState {
   value: MyData[];
   status: Status.IDLE | Status.LOADING | Status.FAILED;
-  updatedAt: Date;
+  updatedAt: string;
   updated: boolean;
   error?: string | null;
 }
@@ -20,7 +20,7 @@ export interface CounterSliceState {
 const initialState: CounterSliceState = {
   value: fallback,
   status: Status.IDLE,
-  updatedAt: new Date(),
+  updatedAt: new Date().toISOString(),
   updated: false,
   error: null,
 };
@@ -30,9 +30,15 @@ export const homeSlice = createAppSlice({
   initialState,
   reducers: (create) => ({
     updatedata: create.reducer( (state, action: PayloadAction<MyData[]>) => {
+      localStorage.setItem("data", JSON.stringify(action.payload));
+      state.updated = true;
       state.value = action.payload;
     }),
     fetchFirstData: create.asyncThunk(async () => {
+      const data = localStorage.getItem("data");
+      if (data && Object.keys(data).length > 0) {
+        return JSON.parse(data);
+      }
       const response = await fetchData();
       // The value we return becomes the `fulfilled` action payload
       console.log(response.data);
@@ -42,7 +48,7 @@ export const homeSlice = createAppSlice({
       pending: (state) => {
         state.status = Status.LOADING;
       },
-      fulfilled: (state, action) => {
+      fulfilled: (state: CounterSliceState, action: PayloadAction<MyData[]>) => {
         state.status = Status.IDLE;
         state.value = action.payload;
       },
@@ -61,13 +67,16 @@ export const homeSlice = createAppSlice({
         pending: (state) => {
           state.status = Status.LOADING;
         },
-        fulfilled: (state, action) => {
+        fulfilled: (state: CounterSliceState, action: PayloadAction<MyData[]>) => {
           state.status = Status.IDLE;
+          state.updated = false;
+          state.updatedAt = new Date().toISOString();
           state.value = action.payload;
         },
         rejected: (state, action) => {
           state.status = Status.FAILED;
-          state.error = action.error.message;
+          // TODO: since the api do not exist right now, not to break the UI not setting error state
+          // state.error = action.error.message;
         },
       },
     ),
