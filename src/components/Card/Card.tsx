@@ -1,20 +1,21 @@
 import { base64Str } from "@/components/Loaders/imageFallbackLoader";
+import Overlay from "@/components/Overlay";
 import Image from "next/image";
 import { MyData } from "../Body/fetcher";
 
 const Card = ({ item }: { item: MyData }) => {
   return (
-    <div key={item.position} className="col-span-1 rounded-lg h-64">
-      <h3>{item.title}</h3>
+    <Overlay>
+      <h3 className="text-left">{item.title}</h3>
       <Image
         src={`/images/${item.position}.webp`}
         alt={item.title}
         width={100}
         height={100}
-        className="w-full h-full rounded-lg"
+        className="rounded-lg h-64 w-64"
         placeholder={base64Str}
       />
-    </div>
+    </Overlay>
   );
 };
 
