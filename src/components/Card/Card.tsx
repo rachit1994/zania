@@ -7,6 +7,7 @@ import { memo } from "react";
 
 const Card = ({ item }: { item: MyData }) => {
   const pathname = usePathname();
+  console.log('pathname:', pathname);
   return (
     <Overlay>
       <h3 className="text-left">{item.title}</h3>

@@ -41,7 +41,6 @@ export const homeSlice = createAppSlice({
       }
       const response = await fetchData();
       // The value we return becomes the `fulfilled` action payload
-      console.log(response.data);
       return response.data;
     },
     {
