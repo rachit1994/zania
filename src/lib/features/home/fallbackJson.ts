@@ -1,4 +1,8 @@
-import { MyData } from "./fetcher";
+export interface MyData {
+  type: string;
+  title: string;
+  position: number;
+}
 
 const fallback: MyData[] = [
   { type: "bank-draft", title: "Bank Draft", position: 0 },
