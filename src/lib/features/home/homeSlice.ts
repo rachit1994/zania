@@ -67,7 +67,7 @@ export const homeSlice = createAppSlice({
         pending: (state) => {
           state.status = Status.LOADING;
         },
-        fulfilled: (state: CounterSliceState, action: PayloadAction<MyData[]>) => {
+        fulfilled: (state: CounterSliceState, action: any) => {
           state.status = Status.IDLE;
           state.updated = false;
           state.updatedAt = new Date().toISOString();
